@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+   
+    border:1px solid black;
+    padding-bottom: 20px;
+}
+.header .home-navbar{
+    padding-top: 10px;
+    padding-right: 50px;
+}
+.header .about-navbar{
+    padding-top: 10px;
+    padding-right: 50px;
+}
+.header .login-navbar{
+    padding-right: 50px;
+    padding-top: 10px;
+
+}
