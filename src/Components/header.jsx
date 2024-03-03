@@ -4,7 +4,7 @@ import { LOGO } from "../Utils/constants.jsx";
 const Header = () => {
   return (
     <div>
-      <div className="flex-1  ">
+      <div className="header">
         <div className="left-side">
           <div className="logo">
             <img alt="Logo" src={LOGO} />
