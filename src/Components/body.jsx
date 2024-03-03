@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import MockData from '../Utils/MockData.js';
+import MockData from '../Utils/MockData.jsx';
 import RecipesCard from "./recipeCard";
+import {Link} from "react-router-dom";
 import "../Css/body.css";
 const Body = () => {
   const [inputSearch, setInputSearch] = useState({});
   const [filteredData, setFilteredData] = useState(MockData);
 
-  console.log({ MockData });
   const onSubmit = () => {
     const filteredRecipe = Object.values(MockData).filter((recipe) =>
       recipe?.recipeName.toLowerCase().includes(inputSearch.toLowerCase()) 
       || recipe?.tags.includes(inputSearch)
       || recipe?.authorName.toLowerCase().includes(inputSearch.toLowerCase())
     );
-    console.log({filteredRecipe});
     setFilteredData(filteredRecipe);
   };
 
@@ -31,13 +30,16 @@ const Body = () => {
               setInputSearch(e.target.value);
             }}
           />
-
           <button onClick={onSubmit}>Search</button>
         </div>
         <div className="card-container">
-          {Object.values(filteredData).map((recipe) => {
-            return <RecipesCard {...recipe} />;
-          })}
+          {Object.values(filteredData).map((recipe) => (
+            <Link key = {recipe.id} 
+            to = {"/details/" + recipe.id +"/"+ recipe.recipeName}
+            style={{ textDecoration: 'none', color: 'black' }}>
+           <RecipesCard {...recipe} />
+           </Link>
+          ))}  
         </div>
       </div>
     </div>

@@ -1,10 +1,11 @@
-import "./App.css";
+// import "./App.css";
 import FormData from "./Login/FormData.js";
 import Recipes from "./Components/recipes.jsx";
 import Error from "./Components/error.jsx";
 import About from "./Components/about.jsx";
 import { createBrowserRouter,RouterProvider }from "react-router-dom";
 import Body from "./Components/body.jsx";
+import Details from "./Components/Details.jsx";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
         }
       ]
     },
+    {
+      path:"/details/:id/:recipeName",
+      element:<Details/>
+    }
    
   ]);
   return (

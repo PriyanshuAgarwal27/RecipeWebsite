@@ -1,8 +1,6 @@
 import React from "react";
 import '../Css/body.css';
 const RecipesCard = (props) => {
-    // const {cardData} = props;
-  // console.log("props=", props);
 
   return( 
   <div className="receipe-card">
@@ -12,7 +10,7 @@ const RecipesCard = (props) => {
     <div className="author" style={{backgroundColor:'red'}}>{props.authorName}</div>
     <div className="tag"style={{backgroundColor:'blue'}}>{props.tags.map(tag => <div className="recipe-tag">{tag}</div>)}</div>
     </div>
-    
+   
   </div>);
 };
 
