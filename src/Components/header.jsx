@@ -4,13 +4,11 @@ import { LOGO } from "../Utils/constants.jsx";
 const Header = () => {
   return (
     <div>
-      <div className="header">
-        <div className="left-side">
-          <div className="logo">
-            <img alt="Logo" src={LOGO} />
-          </div>
+      <div class="flex flex-row items-center bg-pink-300">
+        <div className="w-3.5 h-3.5 justify-start">
+          <img alt="Logo" src={LOGO} />
         </div>
-        <div className="right-side">
+        <div className="flex flex-row justify-end">
           <div className="home-navbar">
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
               Home

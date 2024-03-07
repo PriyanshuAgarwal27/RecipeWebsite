@@ -10,6 +10,5 @@ const Recipes = () =>{
         <Outlet/>    
     </div>);
     
-
 };
 export default Recipes;
