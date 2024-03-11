@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import './FormData.css';
-import Recipes from "../Components/recipes";
+import "./FormData.css";
+
 const FormData = (props) => {
-    const [submitDis,setsubmitDis] = useState(true);
+  const [submitDis, setsubmitDis] = useState(true);
   const [formData, setFormData] = useState({
-    userName: '',
-    authorName: '',
-    reacipeName: '',
-    description: '',
-    tag: '',
+    userName: "",
+    authorName: "",
+    reacipeName: "",
+    description: "",
+    tag: "",
   });
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
-  const onSubmit = async() =>{
-    
+  const onSubmit = async () => {
     // try {
     //     const response = await fetch('http://localhost:3000/api', {
     //       method: 'POST',
@@ -27,7 +26,7 @@ const FormData = (props) => {
     //       },
     //       body: JSON.stringify(formData),
     //     });
-  
+
     //     if (response.ok) {
     //       const data = await response.json();
     //       console.log('Success:', data);
@@ -37,12 +36,12 @@ const FormData = (props) => {
     //   } catch (error) {
     //     console.error('Error:', error.message);
     //   }
-    console.log("data=",formData);
+    console.log("data=", formData);
     props.setFormOpen(false);
   };
   return (
-    <div className="form-container" >
-       <form >
+    <div className="form-container">
+      <form>
         <label>UserName:</label>
         <input
           type="text"
@@ -86,16 +85,13 @@ const FormData = (props) => {
           value={formData.tag}
           id="tag"
           onChange={handleInputChange}
-     
         />
-        <button className = "submit-button" type = "button" onClick={onSubmit} 
-        >Submit</button>
-
+        <button className="submit-button" type="button" onClick={onSubmit}>
+          Submit
+        </button>
       </form>
-        {/* <Recipes data = {formData} /> */}
-    
+      {/* <Recipes data = {formData} /> */}
     </div>
-    
   );
 };
 

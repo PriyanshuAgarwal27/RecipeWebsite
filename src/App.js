@@ -1,43 +1,54 @@
 // import "./App.css";
-import FormData from "./Login/FormData.js";
-import Recipes from "./Components/recipes.jsx";
-import Error from "./Components/error.jsx";
-import About from "./Components/about.jsx";
-import { createBrowserRouter,RouterProvider }from "react-router-dom";
-import Body from "./Components/body.jsx";
-import Details from "./Components/Details.jsx";
+import FormData from "./Login/FormData";
+import Error from "./Components/RouterError";
+import About from "./Components/About";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import RecipeList from "./Components/RecipeList";
+import SpecificRecipe from "./Components/SpecificRecipe";
+import Layout from "./Components/Layout";
 
 function App() {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Recipes />,
-      errorElement:<Error/>,
-      children:[
+      element: <Layout />,
+      errorElement: <Error />,
+      children: [
         {
-          path:"/",
-          element:<Body/>,
+          index: true,
+          element: <Navigate to="/recipes" />,
         },
         {
-          path: "about",
+          path: "/recipes",
+          children: [
+            {
+              index: true,
+              element: <RecipeList />,
+            },
+            {
+              path: ":recipeId",
+              element: <SpecificRecipe />,
+            },
+          ],
+        },
+        {
+          path: "/about",
           element: <About />,
         },
         {
-          path:"createRecipe",
-          element:<FormData/>
-        }
-      ]
+          path: "/createRecipe",
+          element: <FormData />,
+        },
+      ],
     },
-    {
-      path:"/details/:id/:recipeName",
-      element:<Details/>
-    }
-   
   ]);
   return (
     <div>
-
-      <RouterProvider router={appRouter}/>
+      <RouterProvider router={appRouter} />
     </div>
   );
 }

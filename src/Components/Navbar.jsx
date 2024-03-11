@@ -1,14 +1,20 @@
-import "../Css/header.css";
+import React from "react";
 import { Link } from "react-router-dom";
 import { LOGO } from "../Utils/constants.jsx";
+import "../Css/header.css";
+
 const Header = () => {
+  //subscribing our store using a selecteor
+  // const cart = useSelector(appStore);
   return (
     <div>
-      <div class="flex flex-row items-center bg-pink-300">
-        <div className="w-3.5 h-3.5 justify-start">
-          <img alt="Logo" src={LOGO} />
+      <div className="header">
+        <div className="left-side ">
+          <div className="logo">
+            <img alt="Logo" src={LOGO} />
+          </div>
         </div>
-        <div className="flex flex-row justify-end">
+        <div className="right-side">
           <div className="home-navbar">
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
               Home
@@ -30,6 +36,13 @@ const Header = () => {
               Create Recipes{" "}
             </Link>
           </div>
+          {/* <div className="like">
+            <Link 
+            to = "/like"
+            style = {{textDecoration : "none", color:"black"}}>
+              Like (0 likes)
+            </Link>
+          </div> */}
         </div>
       </div>
     </div>

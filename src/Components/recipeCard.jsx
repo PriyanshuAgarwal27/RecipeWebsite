@@ -1,17 +1,40 @@
-import React from "react";
-import '../Css/body.css';
-const RecipesCard = (props) => {
+import { useMemo } from "react";
+import { CARD_IMAGE } from "../Utils/constants";
+import "../Css/RecipeList.css";
+const RecipesCard = ({
+  userName,
+  recipeName,
+  authorName,
+  tags,
+  description,
+}) => {
+  const truncatedDescription = useMemo(() => {
+    if (description.length >= 100) {
+      return description.substring(0, 100) + "...";
+    }
+    return description;
+  }, [description]);
+  return (
+    <div className="receipe-card">
+      <div className="card-header">
+        <div className="recipename">{recipeName}</div>
+        <div className="author">~ {authorName}</div>
+      </div>
+      {/* <hr className="header-sep" /> */}
+      {/* <div className="bottom-card"> */}
+      <div className="card-image">
+        <img alt="card" src={CARD_IMAGE} />
+      </div>
+      <div className="description">{truncatedDescription}</div>
 
-  return( 
-  <div className="receipe-card">
-    <div className="user">{props.userName}</div>
-    <div className="recipename">{props.recipeName}</div>
-    <div className="bottom-card">
-    <div className="author" style={{backgroundColor:'red'}}>{props.authorName}</div>
-    <div className="tag"style={{backgroundColor:'blue'}}>{props.tags.map(tag => <div className="recipe-tag">{tag}</div>)}</div>
+      <div className="tag">
+        {tags.map((tag) => (
+          <div className="recipe-tag">{tag}</div>
+        ))}
+      </div>
+      {/* </div> */}
     </div>
-   
-  </div>);
+  );
 };
 
 export default RecipesCard;

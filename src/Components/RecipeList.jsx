@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import MockData from '../Utils/MockData.jsx';
-import RecipesCard from "./recipeCard";
-import {Link} from "react-router-dom";
+import MockData from "../Utils/MockData";
+import "../Css/RecipeList.css";
+import RecipesCard from "./RecipeCard.jsx";
+import { Link } from "react-router-dom";
+import { getRecipes } from "../services/recipeService";
 import "../Css/body.css";
-const Body = () => {
+
+const RecipeList = () => {
   const [inputSearch, setInputSearch] = useState({});
   const [filteredData, setFilteredData] = useState(MockData);
 
-  const onSubmit = () => {
-    const filteredRecipe = Object.values(MockData).filter((recipe) =>
-      recipe?.recipeName.toLowerCase().includes(inputSearch.toLowerCase()) 
-      || recipe?.tags.includes(inputSearch)
-      || recipe?.authorName.toLowerCase().includes(inputSearch.toLowerCase())
-    );
-    setFilteredData(filteredRecipe);
+  const onSubmit = async () => {
+    const data = await getRecipes({ search: inputSearch });
+    setFilteredData(data);
   };
-
 
   return (
     <div className="body">
@@ -30,20 +28,23 @@ const Body = () => {
               setInputSearch(e.target.value);
             }}
           />
+
           <button onClick={onSubmit}>Search</button>
         </div>
         <div className="card-container">
           {Object.values(filteredData).map((recipe) => (
-            <Link key = {recipe.id} 
-            to = {"/details/" + recipe.id +"/"+ recipe.recipeName}
-            style={{ textDecoration: 'none', color: 'black' }}>
-           <RecipesCard {...recipe} />
-           </Link>
-          ))}  
+            <Link
+              key={recipe.id}
+              to={"/recipes/" + recipe.id}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <RecipesCard {...recipe} />
+            </Link>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Body;
+export default RecipeList;
