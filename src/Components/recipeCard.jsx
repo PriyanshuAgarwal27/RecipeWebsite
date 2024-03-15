@@ -20,8 +20,6 @@ const RecipesCard = ({
         <div className="recipename">{recipeName}</div>
         <div className="author">~ {authorName}</div>
       </div>
-      {/* <hr className="header-sep" /> */}
-      {/* <div className="bottom-card"> */}
       <div className="card-image">
         <img alt="card" src={CARD_IMAGE} />
       </div>

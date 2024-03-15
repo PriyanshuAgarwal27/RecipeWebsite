@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
-import MockData from "../Utils/MockData";
-import "../Css/RecipeList.css";
-import RecipesCard from "./RecipeCard";
 import { Link, useSearchParams } from "react-router-dom";
+import RecipesCard from "./RecipeCard";
 import { getRecipes } from "../services/recipeService";
+import { useDebounce } from "../hooks/useDebounce";
+import MockData from "../Utils/MockData";
 import "../Css/body.css";
+import "../Css/RecipeList.css";
 
 const RecipeList = () => {
   const [inputSearch, setInputSearch] = useState("");
-  const [filteredData, setFilteredData] = useState(MockData);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchParams] = useSearchParams();
+  const debouncedInputSearch = useDebounce(inputSearch, 500);
 
   const getRecipesFromService = async () => {
     console.log("calling");
-    const data = await getRecipes({ search: inputSearch });
+    const data = await getRecipes({ search: debouncedInputSearch });
     setFilteredData(data);
   };
 
   useEffect(() => {
     getRecipesFromService();
-  }, [inputSearch]);
+  }, [debouncedInputSearch]);
 
   useEffect(() => {
     // const queryParams = new URLSearchParams(location.search);
@@ -43,7 +45,7 @@ const RecipeList = () => {
           />
         </div>
         <div className="card-container">
-          {Object.values(filteredData).map((recipe) => (
+          {filteredData.map((recipe) => (
             <Link
               key={recipe.id}
               to={"/recipes/" + recipe.id}
