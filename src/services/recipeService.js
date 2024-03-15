@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import mockData from "../Utils/MockData";
 
 export const getRecipes = (filters) => {
+  console.log(filters);
   const { search } = filters;
   return new Promise((resolve, reject) => {
     let data = [...mockData];

@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MockData from "../Utils/MockData";
 import "../Css/RecipeList.css";
-import RecipesCard from "./RecipeCard.jsx";
-import { Link } from "react-router-dom";
+import RecipesCard from "./RecipeCard";
+import { Link, useSearchParams } from "react-router-dom";
 import { getRecipes } from "../services/recipeService";
 import "../Css/body.css";
 
 const RecipeList = () => {
-  const [inputSearch, setInputSearch] = useState({});
+  const [inputSearch, setInputSearch] = useState("");
   const [filteredData, setFilteredData] = useState(MockData);
+  const [searchParams] = useSearchParams();
 
-  const onSubmit = async () => {
+  const getRecipesFromService = async () => {
+    console.log("calling");
     const data = await getRecipes({ search: inputSearch });
     setFilteredData(data);
   };
+
+  useEffect(() => {
+    getRecipesFromService();
+  }, [inputSearch]);
+
+  useEffect(() => {
+    // const queryParams = new URLSearchParams(location.search);
+    const authorName = searchParams.get("authorName");
+    setInputSearch(authorName);
+  }, [searchParams]);
 
   return (
     <div className="body">
       <div className="search">
         <div className="input-search">
           <input
+            value={inputSearch}
             type="text"
             placeholder="Search for recipes"
             name="search"
@@ -28,8 +41,6 @@ const RecipeList = () => {
               setInputSearch(e.target.value);
             }}
           />
-
-          <button onClick={onSubmit}>Search</button>
         </div>
         <div className="card-container">
           {Object.values(filteredData).map((recipe) => (
