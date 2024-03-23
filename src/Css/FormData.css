@@ -1,0 +1,91 @@
+.form-container{
+   display: flex;
+   justify-content: center;
+   margin:35px auto;
+   flex-direction: column;
+   max-width: 640px;
+   /* align-items: center; */
+}
+.form-container h2{
+    font-size: revert-layer;
+    align-self: center;
+}
+
+.form-container label{
+    margin-bottom: 8px; 
+   
+}
+
+.form-container input{
+    display: inline-block;
+    padding-left: 7px;
+    justify-self: auto;
+    margin: 1px;
+    width: 100%;
+    border-radius: 1px;
+    border: 1px solid black;
+    background-color: rgb(250, 250, 250);
+    
+    &.input-tag{
+        align-self: flex-start;
+        max-height:fit-content;
+        
+    }
+    &.ingredient-name{
+        width:297px; 
+        margin-right: 5px;
+    }
+    &.ingredient-quantity{
+        width:297px;
+        margin-left:5px;
+    }
+
+    &.recipeSteps{
+        /* block-size: 70px; */
+        padding-top:5px;
+        height:70px;
+
+    }
+    &.onDeleteIngredients{
+    align-self: flex-end;
+    }
+}
+.form-container .submit-button{
+    /* margin: 20px; */
+    border: 1px solid black;
+    padding: 2px;
+    width: 150px;
+    background-color: rgb(229, 60, 60);
+}
+.form-container .tag-cross{
+    display:inline-block;
+    width:auto;
+    align-self: flex-end;
+    height:auto;
+    padding: 2px;
+    margin: 3px;
+    border: 1px solid black;
+    background-color: rgb(229, 60, 60);
+}
+.form-container label .ingredients{
+    display: flex;
+    max-width: 30px;
+    flex-direction: row;
+
+}
+.form-container label .tag-label{
+    display: flex;
+    flex-direction: column;
+}
+.toAddIngredients{
+    font-display: bold;
+    align-self: flex-start;
+    padding-left: 5px;
+    color: rgb(162, 162, 162);
+    margin-bottom: 5px;
+    /* margin-left: 5px; */
+}
+.checkbox{
+    padding-top: 4px;;
+    color: rgb(135, 133, 133);
+}

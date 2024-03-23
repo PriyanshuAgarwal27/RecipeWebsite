@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./FormData.css";
+import "../Css/FormData.css";
+import { TERMS_AND_CONDITIONS } from "../Utils/constants";
 import { createRecipe } from "../services/recipeService";
 const FormData = (props) => {
   const [toShow, setToShow] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [data, setData] = useState({});
   const [inputValue, setInputValue] = useState({
     authorName: "",
@@ -36,6 +38,7 @@ const FormData = (props) => {
       }));
     }
   };
+
   const handleTagValue = (e) => {
     const { value } = e.target;
     setTagValue(value);
@@ -94,43 +97,38 @@ const FormData = (props) => {
     };
     createRecipe(recipeData);
   };
+  const onTrueCheckbox = () => {
+    setIsChecked(false);
+  };
   return (
     <div className="form-container">
+      <h2>Add a New Recipe</h2>
       <label>
-        Author :
-        <input
-          type="text"
-          name="authorName"
-          value={inputValue.authorName}
-          id="authorName"
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Recipe Name:
         <input
           type="text"
           name="recipeName"
+          placeholder="Recipe Title"
           value={inputValue.recipeName}
           id="recipeName"
           onChange={handleInputChange}
         />
       </label>
       <label>
-        Description:
         <input
           type="text"
           name="description"
+          placeholder="Description"
           value={inputValue.description}
           id="description"
           onChange={handleInputChange}
         />
       </label>
-      <label>
-        Tag:
+      <label className="tag-label">
         <input
+          className="input-tag"
           type="text"
           name="tag"
+          placeholder="Tag"
           value={tagValue}
           id="tag"
           onKeyDown={onPressKeys}
@@ -138,7 +136,7 @@ const FormData = (props) => {
         />
         {displayTag.map((d, index) => {
           return (
-            <div key={index} className="tag cross">
+            <div key={index} className="tag-cross">
               {d}{" "}
               <button type="button" onClick={() => onDeleteTag(index)}>
                 x
@@ -147,58 +145,86 @@ const FormData = (props) => {
           );
         })}
       </label>
+      <label>
+        <input
+          type="text"
+          name="authorName"
+          placeholder="Author"
+          value={inputValue.authorName}
+          id="authorName"
+          onChange={handleInputChange}
+        />
+      </label>
+      Ingredients:
       {toShow &&
         ingredientsValue.map((ingredient, index) => (
           <label key={index} className="ingredients">
-            {index === 0 && <div>Ingredients:</div>}
             <input
+              className="ingredient-name"
               type="text"
               name="name"
+              placeholder="Name"
               value={ingredient.name}
               id="ingredientsKey"
               onChange={(event) => handleIngredientsValue(event, index)}
             />
             <input
+              className="ingredient-quantity"
               type="text"
               name="quantity"
+              placeholder="Quantity"
               value={ingredient.quantity}
               id="ingredientsValue"
               onChange={(event) => handleIngredientsValue(event, index)}
             />
             <button
-              className="toAddIngredients"
-              onClick={() => handleAddIngredient()}
+              className="onDeleteIngredients"
+              onClick={() => onDeleteIngredients(index)}
             >
-              +
+              <img
+                width={"30px"}
+                height={"30px"}
+                alt="dustbinIcon"
+                src="https://thumb.ac-illust.com/3b/3b5b217ce258702c0956cbf3b146acba_t.jpeg"
+              ></img>
             </button>{" "}
-            {index != 0 && (
-              <button
-                className="onDeleteIngredients"
-                onClick={() => onDeleteIngredients(index)}
-              >
-                <img
-                  width={"30px"}
-                  height={"30px"}
-                  alt="dustbinIcon"
-                  src="https://thumb.ac-illust.com/3b/3b5b217ce258702c0956cbf3b146acba_t.jpeg"
-                ></img>
-              </button>
-            )}
           </label>
         ))}
+      <button
+        className="toAddIngredients"
+        onClick={() => handleAddIngredient()}
+      >
+        + Add another ingredient
+      </button>
       <label>
-        RecipeSteps:
         <input
+          className="recipeSteps"
           type="text"
           name="recipeSteps"
+          placeholder="RecipeSteps"
           value={inputValue.recipeSteps}
           id="recipeSteps"
           onChange={handleInputChange}
         />
       </label>
-      <button className="submit-button" type="button" onClick={onSubmit}>
-        Submit
-      </button>
+      <label className="checkbox-label">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onClick={() => setIsChecked(!isChecked)}
+        />{" "}
+        <span> {TERMS_AND_CONDITIONS} </span>
+      </label>
+      <center>
+        <button
+          className="submit-button"
+          type="button"
+          disabled={!isChecked}
+          onClick={onSubmit}
+        >
+          Submit
+        </button>
+      </center>
     </div>
   );
 };

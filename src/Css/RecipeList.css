@@ -29,18 +29,13 @@
 .receipe-card .header-sep{
     border-top: 1px solid red;
 }
-.receipe-card .card-image{
-    /* padding: 1.25rem; */
-}
+
 .receipe-card .tag{
     display: flex;
 
 }
 .receipe-card .description{
     margin: 5px 7px;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
     
 }
 .receipe-card .recipe-tag{
