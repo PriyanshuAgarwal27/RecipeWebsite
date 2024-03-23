@@ -8,11 +8,13 @@ const SpecificRecipe = () => {
 
   const getData = async () => {
     const d = await getRecipeById(recipeId);
+    console.log({ d });
     setData(d);
   };
 
   useEffect(() => {
     getData();
+    console.log(data);
   }, []);
 
   return (
@@ -29,7 +31,7 @@ const SpecificRecipe = () => {
           Ingredients
           {Object.keys(data.ingredients).map((d) => {
             return (
-              <div>
+              <div key={d}>
                 {d}: {data.ingredients[d]}
               </div>
             );

@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import RecipesCard from "./RecipeCard";
 import { getRecipes } from "../services/recipeService";
 import { useDebounce } from "../hooks/useDebounce";
-import MockData from "../Utils/MockData";
 import "../Css/body.css";
 import "../Css/RecipeList.css";
 
@@ -14,7 +13,6 @@ const RecipeList = () => {
   const debouncedInputSearch = useDebounce(inputSearch, 500);
 
   const getRecipesFromService = async () => {
-    console.log("calling");
     const data = await getRecipes({ search: debouncedInputSearch });
     setFilteredData(data);
   };

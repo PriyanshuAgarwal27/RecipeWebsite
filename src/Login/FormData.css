@@ -1,26 +1,58 @@
 .form-container{
    display: flex;
    justify-content: center;
-   height: 100vh;
-   align-items: center;
+   margin-top: 40px;
+   flex-direction: column;
+   /* align-items: center; */
 }
 .form-container form{
-    display: flex;
-    flex-direction: column;
+
     width: 300px !important;
    align-items: center;
 
 
 }
 .form-container label{
+        /* display: flex;
+    flex-direction: column; */
     margin-bottom: 8px;
+    
 }
-.form-container .input{
-    width: 100%;
-    padding:8px;
-    box-sizing: border-box;
-    margin-bottom: 16px;
+.form-container input{
+    display: inline-block;
+    padding-left: 7px;
+    justify-self: auto;
+    margin: 1px;
+     border: 1px solid black;
 }
-.submit-button{
+.form-container .submit-button{
     margin: 20px;
+    border: 1px solid black;
+    padding: 2px;
+    background-color: green;
+}
+.form-container .tag{
+    display:inline-block;
+    width:auto;
+    height:auto;
+    padding: 2px;
+    margin: 3px;
+    border: 1px solid black;
+    background-color:aquamarine;
+}
+.form-container label .ingredients{
+    display: flex;
+    max-width: 30px;
+    flex-direction: row;
+
+}
+.toAddIngredients{
+    font-display: bold;
+    padding-left: 5px;
+    /* margin-left: 5px; */
+}
+.onDeleteIngredients{
+    padding-left: 5px;
+    /* width:5px;
+    height:5px;  */
 }

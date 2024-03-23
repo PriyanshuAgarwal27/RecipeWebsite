@@ -1,13 +1,7 @@
 import { useMemo } from "react";
 import { CARD_IMAGE } from "../Utils/constants";
 import "../Css/RecipeList.css";
-const RecipesCard = ({
-  userName,
-  recipeName,
-  authorName,
-  tags,
-  description,
-}) => {
+const RecipesCard = ({ recipeName, authorName, tags, description }) => {
   const truncatedDescription = useMemo(() => {
     if (description.length >= 100) {
       return description.substring(0, 100) + "...";
@@ -27,10 +21,11 @@ const RecipesCard = ({
 
       <div className="tag">
         {tags.map((tag) => (
-          <div className="recipe-tag">{tag}</div>
+          <div key={tag} className="recipe-tag">
+            {tag}
+          </div>
         ))}
       </div>
-      {/* </div> */}
     </div>
   );
 };
