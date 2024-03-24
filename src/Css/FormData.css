@@ -17,9 +17,9 @@
 }
 
 .form-container input{
-    display: inline-block;
+    display: block;
     padding-left: 7px;
-    justify-self: auto;
+    /* justify-self: auto; */
     margin: 1px;
     width: 100%;
     border-radius: 1px;
@@ -40,16 +40,18 @@
         margin-left:5px;
     }
 
-    &.recipeSteps{
-        /* block-size: 70px; */
-        padding-top:5px;
-        height:70px;
-
-    }
+   
     &.onDeleteIngredients{
     align-self: flex-end;
     }
 }
+
+.form-control > .recipeSteps{
+    display: block;
+    width: 100%;
+    border: 1px solid black;
+}
+
 .form-container .submit-button{
     /* margin: 20px; */
     border: 1px solid black;
@@ -58,8 +60,8 @@
     background-color: rgb(229, 60, 60);
 }
 .form-container .tag-cross{
-    display:inline-block;
-    width:auto;
+    /* display:block; */
+    width:fit-content;
     align-self: flex-end;
     height:auto;
     padding: 2px;
@@ -88,4 +90,20 @@
 .checkbox{
     padding-top: 4px;;
     color: rgb(135, 133, 133);
+}
+
+
+.form-control {
+    margin-bottom: 0.75rem;
+}
+
+.form-control > .form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.form-control > .form-input {
+    border-radius: 2px;
+    padding: 0.25rem 0.5rem;
 }
