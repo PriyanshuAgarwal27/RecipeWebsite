@@ -10,7 +10,9 @@
 .recipe-intro .recipe-image img {
   float: right;
   width: auto;
-  height: 200px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
   margin: 10px 0px 4px 4px;
 }
 .recipe-intro .text-part {

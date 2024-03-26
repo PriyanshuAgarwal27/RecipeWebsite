@@ -11,6 +11,7 @@ const FormData = (props) => {
     recipeName: "",
     description: "",
     recipeSteps: "",
+    imageUrl: "",
   });
   const [ingredientsValue, setIngrediantsValue] = useState([
     {
@@ -23,14 +24,13 @@ const FormData = (props) => {
   let newData = {};
   const navigate = useNavigate();
   const handleInputChange = (e) => {
-    console.log(e.target);
     const { name, value } = e.target;
-    console.log(name);
     if (
       name === "authorName" ||
       name === "recipeName" ||
       name === "description" ||
-      name === "recipeSteps"
+      name === "recipeSteps" ||
+      name === "imageUrl"
     ) {
       setInputValue((prevData) => ({
         ...prevData,
@@ -63,7 +63,6 @@ const FormData = (props) => {
   const handleIngredientsValue = (event, index) => {
     const newIngredient = [...ingredientsValue];
     newIngredient[index][event.target.name] = event.target.value;
-    console.log({ newIngredient });
     setIngrediantsValue(newIngredient);
   };
   const handleAddIngredient = () => {
@@ -73,13 +72,10 @@ const FormData = (props) => {
     const filteredIngredients = ingredientsValue.filter(
       (val, i) => i !== index
     );
-    console.log(filteredIngredients);
     setIngrediantsValue(filteredIngredients);
   };
   useEffect(() => {
-    console.log({ ingredientsValue });
     ingredientsValue.map((val) => (newData[val.name] = val.quantity));
-    console.log(newData);
     setData(newData);
   }, [ingredientsValue]);
   const onSubmit = async () => {
@@ -89,8 +85,7 @@ const FormData = (props) => {
     const recipeSteps = inputValue.recipeSteps;
     const ingredients = data;
     const tags = displayTag;
-    const imageUrl =
-      "https://media.istockphoto.com/id/1320922361/photo/woman-taking-tasty-sushi-roll-with-salmon-from-set-at-table-closeup.jpg?s=612x612&w=0&k=20&c=yedOW0jKGjN9H2iGA6MAEIxcc7oVtN-4isL_i74U6Kk=";
+    const imageUrl = inputValue.imageUrl;
     const recipeData = {
       authorName,
       recipeName,
@@ -108,9 +103,7 @@ const FormData = (props) => {
     try {
       await createRecipe(recipeData);
       navigate("/recipes");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const onEnterIngredients = (e) => {
     if (e.code === "Enter") {
@@ -176,7 +169,6 @@ const FormData = (props) => {
       </div>
       <div className="form-control">
         <label className="form-label" htmlFor="authorName">
-          {" "}
           AuthorName
         </label>
         <input
@@ -188,6 +180,20 @@ const FormData = (props) => {
           id="authorName"
           onChange={handleInputChange}
         />
+      </div>
+      <div className="form-control">
+        <label className="form-label" htmlFor="imageUrl">
+          Image URL
+          <input
+            type="text"
+            className="form-input"
+            name="imageUrl"
+            placeholder="eg https://url"
+            value={inputValue.imageUrl}
+            id="imageUrl"
+            onChange={handleInputChange}
+          />
+        </label>
       </div>
       <div className="form-control">
         <label className="form-label">Ingredients</label>

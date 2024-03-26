@@ -8,13 +8,11 @@ const SpecificRecipe = () => {
 
   const getData = async () => {
     const d = await getRecipeById(recipeId);
-    console.log({ d });
     setData(d);
   };
 
   useEffect(() => {
     getData();
-    console.log(data);
   }, []);
 
   return (
@@ -40,21 +38,7 @@ const SpecificRecipe = () => {
             </div>
             <div className="description">
               <h2 className="description-tag">Description </h2>
-              <p className="description-detail">
-                {data.description}Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Aliquam fugit eum obcaecati architecto quo
-                incidunt accusamus sint deserunt inventore eos. Labore
-                exercitationem voluptatibus odio. Repudiandae animi provident
-                accusantium sequi blanditiis eligendi voluptatum eos aperiam
-                itaque, laborum vel porro quo architecto quasi at dicta eum odit
-                omnis, recusandae maiores unde commodi et. Exercitationem magnam
-                dolorum enim impedit architecto tempora. Nesciunt aspernatur
-                provident animi, nobis aut numquam! Nostrum enim sit eum quia
-                voluptatum atque pariatur dolorum totam consequatur aspernatur
-                labore officia praesentium reprehenderit doloremque a architecto
-                facere, alias qui maxime iure earum soluta magnam? At, vitae
-                eius culpa inventore explicabo consequatur a?
-              </p>
+              <p className="description-detail">{data.description}</p>
             </div>
           </div>
         </div>

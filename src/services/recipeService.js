@@ -33,7 +33,6 @@ export const getRecipeById = (recipeId) => {
 export const createRecipe = (recipeData) => {
   return new Promise((resolve, reject) => {
     const newRecipe = { ...recipeData, id: nanoid(5) };
-    console.log(newRecipe);
     mockData.push(newRecipe);
     resolve(newRecipe);
   });

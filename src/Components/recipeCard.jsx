@@ -2,7 +2,14 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { CARD_IMAGE } from "../Utils/constants";
 import "../Css/RecipeList.css";
-const RecipesCard = ({ recipeName, authorName, tags, description, id }) => {
+const RecipesCard = ({
+  recipeName,
+  authorName,
+  tags,
+  description,
+  id,
+  imageUrl,
+}) => {
   const truncatedDescription = useMemo(() => {
     if (description.length >= 100) {
       return description.substring(0, 100) + "...";
@@ -21,8 +28,13 @@ const RecipesCard = ({ recipeName, authorName, tags, description, id }) => {
           <div className="recipename">{recipeName}</div>
           <div className="author">~ {authorName}</div>
         </div>
-        <div className="card-image">
-          <img alt="card" src={CARD_IMAGE} />
+        <div
+          className="card-image"
+          style={{
+            background: `url(${imageUrl})`,
+          }}
+        >
+          {/* <img alt="card" src={imageUrl} /> */}
         </div>
         <div className="description">{truncatedDescription}</div>
 
