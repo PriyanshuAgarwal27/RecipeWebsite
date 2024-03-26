@@ -1,7 +1,6 @@
 // import "./App.css";
 import FormData from "./Login/FormData";
 import Error from "./Components/RouterError";
-import About from "./Components/About";
 import {
   createBrowserRouter,
   Navigate,
@@ -34,10 +33,6 @@ function App() {
               element: <SpecificRecipe />,
             },
           ],
-        },
-        {
-          path: "/about",
-          element: <About />,
         },
         {
           path: "/createRecipe",

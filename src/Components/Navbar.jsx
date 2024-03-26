@@ -20,14 +20,7 @@ const Header = () => {
               Home
             </Link>
           </div>
-          <div className="about-navbar">
-            <Link
-              to="/about"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              About us
-            </Link>
-          </div>
+
           <div className="login-navbar">
             <Link
               to="/createRecipe"

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../Css/FormData.css";
+import { useNavigate } from "react-router-dom";
 import { TERMS_AND_CONDITIONS } from "../Utils/constants";
 import { createRecipe } from "../services/recipeService";
 const FormData = (props) => {
-  const [toShow, setToShow] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [data, setData] = useState({});
   const [inputValue, setInputValue] = useState({
@@ -21,7 +21,7 @@ const FormData = (props) => {
   const [tagValue, setTagValue] = useState("");
   const [displayTag, setDisplayTag] = useState([]);
   let newData = {};
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     console.log(e.target);
     const { name, value } = e.target;
@@ -67,7 +67,6 @@ const FormData = (props) => {
     setIngrediantsValue(newIngredient);
   };
   const handleAddIngredient = () => {
-    setToShow(true);
     setIngrediantsValue([...ingredientsValue, { name: "", quantity: "" }]);
   };
   const onDeleteIngredients = (index) => {
@@ -83,7 +82,7 @@ const FormData = (props) => {
     console.log(newData);
     setData(newData);
   }, [ingredientsValue]);
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const authorName = inputValue.authorName;
     const recipeName = inputValue.recipeName;
     const description = inputValue.description;
@@ -101,7 +100,17 @@ const FormData = (props) => {
       recipeSteps,
       imageUrl,
     };
-    createRecipe(recipeData);
+    if (!(authorName && recipeName)) {
+      window.alert("Mention author name and recipe name");
+      return;
+    }
+
+    try {
+      await createRecipe(recipeData);
+      navigate("/recipes");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const onEnterIngredients = (e) => {
     if (e.code === "Enter") {
@@ -134,7 +143,7 @@ const FormData = (props) => {
           className="form-input"
           type="text"
           name="description"
-          placeholder="Description"
+          placeholder="eg Paneer is mixed with gravy.."
           value={inputValue.description}
           id="description"
           onChange={handleInputChange}
@@ -148,7 +157,7 @@ const FormData = (props) => {
           className="form-input input-tag"
           type="text"
           name="tag"
-          placeholder="Tag"
+          placeholder="eg Veg,Cury"
           value={tagValue}
           id="tag"
           onKeyDown={onPressKeys}
@@ -174,7 +183,7 @@ const FormData = (props) => {
           type="text"
           className="form-input"
           name="authorName"
-          placeholder="Author"
+          placeholder="eg Priyanshu"
           value={inputValue.authorName}
           id="authorName"
           onChange={handleInputChange}
@@ -182,47 +191,46 @@ const FormData = (props) => {
       </div>
       <div className="form-control">
         <label className="form-label">Ingredients</label>
-        {toShow &&
-          ingredientsValue.map((ingredient, index) => (
-            <label key={index} className="ingredients">
-              <input
-                className="ingredient-name"
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={ingredient.name}
-                id="ingredientsKey"
-                onChange={(event) => handleIngredientsValue(event, index)}
-              />
-              <input
-                className="ingredient-quantity"
-                type="text"
-                name="quantity"
-                placeholder="Quantity"
-                value={ingredient.quantity}
-                id="ingredientsValue"
-                onKeyDown={onEnterIngredients}
-                onChange={(event) => handleIngredientsValue(event, index)}
-              />
-              <button
-                className="onDeleteIngredients"
-                onClick={() => onDeleteIngredients(index)}
-              >
-                <img
-                  width={"30px"}
-                  height={"30px"}
-                  alt="dustbinIcon"
-                  src="https://thumb.ac-illust.com/3b/3b5b217ce258702c0956cbf3b146acba_t.jpeg"
-                ></img>
-              </button>{" "}
-            </label>
-          ))}
+        {ingredientsValue.map((ingredient, index) => (
+          <div key={`ing-inp-${index}`} className="ingredients">
+            <input
+              className="ingredient-name"
+              type="text"
+              name="name"
+              placeholder="eg Onion"
+              value={ingredient.name}
+              id="ingredientsKey"
+              onChange={(event) => handleIngredientsValue(event, index)}
+            />
+            <input
+              className="ingredient-quantity"
+              type="text"
+              name="quantity"
+              placeholder="eg 1kg"
+              value={ingredient.quantity}
+              id="ingredientsValue"
+              onKeyDown={onEnterIngredients}
+              onChange={(event) => handleIngredientsValue(event, index)}
+            />
+            <button
+              className="onDeleteIngredients"
+              onClick={() => onDeleteIngredients(index)}
+            >
+              <img
+                width={"30px"}
+                height={"30px"}
+                alt="dustbinIcon"
+                src="https://thumb.ac-illust.com/3b/3b5b217ce258702c0956cbf3b146acba_t.jpeg"
+              ></img>
+            </button>{" "}
+          </div>
+        ))}
       </div>
       <button
         className="toAddIngredients"
         onClick={() => handleAddIngredient()}
       >
-        + Add another ingredient
+        + Add ingredient
       </button>
       <div className="form-control">
         <label className="form-label" htmlFor="recipeSteps">
@@ -233,20 +241,21 @@ const FormData = (props) => {
           className="recipeSteps form-input"
           type="text"
           name="recipeSteps"
-          placeholder="RecipeSteps"
+          placeholder="eg 1) Cut Onions 2) Add Paneer"
           value={inputValue.recipeSteps}
           id="recipeSteps"
           onChange={handleInputChange}
         ></textarea>
       </div>
-      <label className="checkbox-label form-label"></label>
-      <input
-        type="checkbox"
-        className="form-input"
-        checked={isChecked}
-        onChange={(e) => setIsChecked(e.target.checked)}
-      />{" "}
-      <span> {TERMS_AND_CONDITIONS} </span>
+      <div className="tc-checkbox-container">
+        <input
+          type="checkbox"
+          className="checkbox-input"
+          checked={isChecked}
+          onChange={(e) => setIsChecked(e.target.checked)}
+        />{" "}
+        <p> {TERMS_AND_CONDITIONS} </p>
+      </div>
       <center>
         <button
           className="submit-button"

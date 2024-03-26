@@ -1,65 +1,82 @@
-.specific-recipe-container{
-    
-    display: flex;
-    margin:35px 25px;
-    flex-direction: column;
-    justify-content: center;
+.specific-recipe-container {
+  display: block;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
 }
-.recipe-image img{
-    width: auto;
-    height: 200px;
+.recipe-intro {
+  padding: 10px 0px;
 }
-.top-part{
-    display: flex;
-    flex-direction: row;
+.recipe-intro .recipe-image img {
+  float: right;
+  width: auto;
+  height: 200px;
+  margin: 10px 0px 4px 4px;
+}
+.recipe-intro .text-part {
+  text-align: justify;
+}
+.recipe-intro .text-part .recipe-name {
+  font-weight: bold;
+  /* color: rgb(212, 52, 52); */
+  color: #a4133c;
+  font-size: 2rem;
+}
+.recipe-intro .text-part .authorName {
+  text-decoration: underline;
+  font-style: italic;
+}
+.recipe-intro .text-part .description-tag {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
 
-}
-.left-top-part{
-    justify-self: flex-start;
-}
-.recipe-image{
-    justify-self:self-end;
-}
-.description-tag{
-    margin-top: 9px;
-    margin-bottom: 9px;
-    font-size:larger;
-    font: bold;
-   
+.description-tag {
+  margin-top: 9px;
+  margin-bottom: 9px;
+  font-size: larger;
+  font: bold;
 }
 .description-detail {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-.ingredients-class{
-    display: flex;
-    flex-direction: row;
+.ingredients-class .ingredients-tag {
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
-.ingredients-tag{
-    margin-top: 9px;
-    justify-self: flex-start;
-    margin-bottom: 9px;
-    font-size:larger;
-    font: bold;
-    margin-right: 40px;
-}
-.ingredients-desc{
-    margin-top: 10px;
-    justify-self: flex-end;
-}
-.recipe-steps-tag{
-    margin-top: 9px;
-    margin-bottom: 9px;
-    font-size:larger;
-    font: bold;
-}
-.tags{
-    margin-top: 9px;
-    margin-bottom: 9px;
-    font-size:larger;
-    font: bold;
-   
+.ingredients-class .ingredients-desc {
+  margin-bottom: 2px;
 }
 
-.single-tag{
-    padding: 5px;
+ul.ingredients-list {
+  list-style: disc;
+  padding-left: 40px;
+}
+ul.ingredients-list .ingredient .ingredient-qty {
+  font-weight: bold;
+}
+.recipe-steps-class .recipe-steps-tag {
+  margin: 9px 0px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.tags {
+  margin-top: 9px;
+  margin-bottom: 9px;
+  font-size: larger;
+  font: bold;
+}
+.tag-container {
+  margin-top: 20px;
+}
+.tag-container .single-tag {
+  padding: 4px 12px;
+  display: inline;
+  margin: 0px 3px;
+  border-radius: 5px;
+  /* background-color: rgb(212, 86, 86); */
+  background-color: #ff4d6d;
+  color: white;
+  /* border: 1px solid black; */
 }

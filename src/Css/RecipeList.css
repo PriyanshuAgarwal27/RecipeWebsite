@@ -1,47 +1,42 @@
-.card-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 38px 0px;
 }
 .receipe-card {
-    margin: 1rem;
-    width: 256px;
-    /* height: 350px; */
-    height: 100%;
-    border-radius: 4px;
-    border: 1px solid black;
-
+  width: 256px;
+  height: 400px;
+  border-radius: 4px;
+  border: 1px solid black;
 }
-.receipe-card .recipename{
-    font-size: 1.25rem;
+.receipe-card .recipename {
+  font-size: 1.25rem;
 }
-.receipe-card .card-header{
-    display: flex;
-    padding: 1rem;
-    justify-content: space-between;
-    align-items: center;
-
+.receipe-card .card-header {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
-.receipe-card .author{
-    font-size: 0.9rem;
-    color: gray;
+.receipe-card .author {
+  font-size: 0.9rem;
+  color: gray;
 }
-.receipe-card .header-sep{
-    border-top: 1px solid red;
+.receipe-card .header-sep {
+  border-top: 1px solid red;
 }
 
-.receipe-card .tag{
-    display: flex;
-
+.receipe-card .tag {
+  display: flex;
 }
-.receipe-card .description{
-    margin: 5px 7px;
-    
+.receipe-card .description {
+  margin: 5px 7px;
 }
-.receipe-card .recipe-tag{
-    display: inline-block;
-    border-radius: 4px;
-    padding: 3px 5px;
-    margin: 5px;
-    background-color: aqua;
+.receipe-card .recipe-tag {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin: 5px;
+  background-color: #ff4d6d;
 }

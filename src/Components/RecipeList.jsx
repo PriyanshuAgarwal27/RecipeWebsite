@@ -26,12 +26,15 @@ const RecipeList = () => {
     const authorName = searchParams.get("authorName");
     setInputSearch(authorName);
   }, [searchParams]);
-
+  const onCancelSearchEvent = () => {
+    setInputSearch("");
+  };
   return (
     <div className="body">
-      <div className="search">
+      <div className="home">
         <div className="input-search">
           <input
+            className="search-input"
             value={inputSearch}
             type="text"
             placeholder="Search for recipes"
@@ -41,16 +44,13 @@ const RecipeList = () => {
               setInputSearch(e.target.value);
             }}
           />
+          <button className="cancel-search-input" onClick={onCancelSearchEvent}>
+            ❌
+          </button>
         </div>
         <div className="card-container">
           {filteredData.map((recipe) => (
-            <Link
-              key={recipe.id}
-              to={"/recipes/" + recipe.id}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <RecipesCard {...recipe} />
-            </Link>
+            <RecipesCard {...recipe} id={recipe.id} />
           ))}
         </div>
       </div>

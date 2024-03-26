@@ -20,8 +20,11 @@ const SpecificRecipe = () => {
   return (
     data && (
       <div className="specific-recipe-container">
-        <div className="top-part">
-          <div className="left-top-part">
+        <div className="recipe-intro">
+          <div className="recipe-image">
+            <img alt="image" src={data.imageUrl}></img>
+          </div>
+          <div className="text-part">
             <h1 className="recipe-name"> {data.recipeName}</h1>
             <Link
               to={`/recipes?authorName=${data.authorName}`}
@@ -29,39 +32,52 @@ const SpecificRecipe = () => {
             >
               {data.authorName}
             </Link>
+            <div className="tag-container">
+              {" "}
+              {data.tags.map((tag) => {
+                return <div className="single-tag">{tag}</div>;
+              })}
+            </div>
+            <div className="description">
+              <h2 className="description-tag">Description </h2>
+              <p className="description-detail">
+                {data.description}Lorem ipsum dolor sit, amet consectetur
+                adipisicing elit. Aliquam fugit eum obcaecati architecto quo
+                incidunt accusamus sint deserunt inventore eos. Labore
+                exercitationem voluptatibus odio. Repudiandae animi provident
+                accusantium sequi blanditiis eligendi voluptatum eos aperiam
+                itaque, laborum vel porro quo architecto quasi at dicta eum odit
+                omnis, recusandae maiores unde commodi et. Exercitationem magnam
+                dolorum enim impedit architecto tempora. Nesciunt aspernatur
+                provident animi, nobis aut numquam! Nostrum enim sit eum quia
+                voluptatum atque pariatur dolorum totam consequatur aspernatur
+                labore officia praesentium reprehenderit doloremque a architecto
+                facere, alias qui maxime iure earum soluta magnam? At, vitae
+                eius culpa inventore explicabo consequatur a?
+              </p>
+            </div>
           </div>
-          <div className="recipe-image">
-            <img alt="image" src={data.imageUrl}></img>
-          </div>
-        </div>
-        <div className="description">
-          <h2 className="description-tag">Description </h2>
-          <span className="description-detail">{data.description}</span>
         </div>
         <div className="ingredients-class">
           <h2 className="ingredients-tag">Ingredients </h2>
           <div className="ingredients-desc">
-            {Object.keys(data.ingredients).map((d) => {
-              return (
-                <div key={d}>
-                  {d.toUpperCase()}: {data.ingredients[d]}
-                </div>
-              );
-            })}
+            <ul className="ingredients-list">
+              {Object.keys(data.ingredients).map((d, idx) => {
+                return (
+                  <li className="ingredient" key={`ingredient-${idx}`}>
+                    <span className="ingredient-qty">
+                      {data.ingredients[d]}
+                    </span>{" "}
+                    {d}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
-        <div>
+        <div className="recipe-steps-class">
           <h2 className="recipe-steps-tag">Recipe Steps </h2>
           <div> {data.recipeSteps}</div>
-        </div>
-        <div className="tag-container">
-          <h2 className="tags">Tags</h2>
-          <div>
-            {" "}
-            {data.tags.map((tag) => {
-              return <div className="single-tag">{tag}</div>;
-            })}
-          </div>
         </div>
       </div>
     )
