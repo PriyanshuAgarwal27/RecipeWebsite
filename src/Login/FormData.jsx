@@ -2,26 +2,32 @@ import React, { useEffect, useState } from "react";
 import "../Css/FormData.css";
 import { useNavigate } from "react-router-dom";
 import { TERMS_AND_CONDITIONS } from "../Utils/constants";
-import { createRecipe } from "../services/recipeService";
-const FormData = (props) => {
+import { createRecipe, updateRecipe } from "../services/recipeService";
+import {
+  convertIngredientsToArray,
+  convertIngredientsToObject,
+} from "../Utils/misc";
+
+const FormData = ({ newDataToUpdate, cancelUpdate, isUpdateMode }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [data, setData] = useState({});
   const [inputValue, setInputValue] = useState({
-    authorName: "",
-    recipeName: "",
-    description: "",
-    recipeSteps: "",
-    imageUrl: "",
+    authorName: newDataToUpdate?.authorName,
+    recipeName: newDataToUpdate?.recipeName,
+    description: newDataToUpdate?.description,
+    recipeSteps: newDataToUpdate?.recipeSteps,
+    imageUrl: newDataToUpdate?.imageUrl,
   });
-  const [ingredientsValue, setIngrediantsValue] = useState([
-    {
-      name: "",
-      quantity: "",
-    },
-  ]);
+  const [ingredientsValue, setIngrediantsValue] = useState(
+    newDataToUpdate
+      ? convertIngredientsToArray(newDataToUpdate?.ingredients ?? [])
+      : []
+  );
+
   const [tagValue, setTagValue] = useState("");
-  const [displayTag, setDisplayTag] = useState([]);
-  let newData = {};
+  const [displayTag, setDisplayTag] = useState(
+    newDataToUpdate ? [...newDataToUpdate?.tags] : []
+  );
+
   const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,14 +50,13 @@ const FormData = (props) => {
     setTagValue(value);
   };
 
-  let tags;
   const onPressKeys = (e) => {
+    let tags;
     if (e.code === "Comma" || e.code === "Enter") {
       tags = tagValue.split(",");
       if (e.code === "Enter") {
-        for (const eachTag in tags) {
-          setDisplayTag((prev) => [...prev, tags[eachTag]]);
-        }
+        tags = tags.map((tag) => tag.trim()).filter((tag) => tag);
+        setDisplayTag((prev) => [...prev, ...tags]);
         setTagValue("");
       }
     }
@@ -74,16 +79,11 @@ const FormData = (props) => {
     );
     setIngrediantsValue(filteredIngredients);
   };
-  useEffect(() => {
-    ingredientsValue.map((val) => (newData[val.name] = val.quantity));
-    setData(newData);
-  }, [ingredientsValue]);
   const onSubmit = async () => {
     const authorName = inputValue.authorName;
     const recipeName = inputValue.recipeName;
     const description = inputValue.description;
     const recipeSteps = inputValue.recipeSteps;
-    const ingredients = data;
     const tags = displayTag;
     const imageUrl = inputValue.imageUrl;
     const recipeData = {
@@ -91,7 +91,7 @@ const FormData = (props) => {
       recipeName,
       description,
       tags,
-      ingredients,
+      ingredients: convertIngredientsToObject(ingredientsValue),
       recipeSteps,
       imageUrl,
     };
@@ -101,8 +101,13 @@ const FormData = (props) => {
     }
 
     try {
-      await createRecipe(recipeData);
-      navigate("/recipes");
+      if (isUpdateMode) {
+        await updateRecipe(newDataToUpdate.id, recipeData);
+        cancelUpdate();
+      } else {
+        await createRecipe(recipeData);
+        navigate("/recipes");
+      }
     } catch (error) {}
   };
   const onEnterIngredients = (e) => {
@@ -113,7 +118,12 @@ const FormData = (props) => {
 
   return (
     <div className="form-container">
-      <h2>Add a New Recipe</h2>
+      {newDataToUpdate ? (
+        <h2>Update a New Recipe </h2>
+      ) : (
+        <h2>Add a New Recipe</h2>
+      )}
+
       <div className="form-control">
         <label htmlFor="recipeName" className="form-label">
           Title
@@ -156,16 +166,19 @@ const FormData = (props) => {
           onKeyDown={onPressKeys}
           onChange={handleTagValue}
         />
-        {displayTag.map((d, index) => {
-          return (
-            <div key={index} className="tag-cross">
-              {d}{" "}
-              <button type="button" onClick={() => onDeleteTag(index)}>
-                x
-              </button>
-            </div>
-          );
-        })}
+
+        <div className="tags-container">
+          {displayTag.map((d, index) => {
+            return (
+              <div key={index} className="tag-cross">
+                {d}{" "}
+                <button type="button" onClick={() => onDeleteTag(index)}>
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="form-control">
         <label className="form-label" htmlFor="authorName">
@@ -271,6 +284,11 @@ const FormData = (props) => {
         >
           Submit
         </button>
+        {newDataToUpdate && (
+          <button className="cancel-button" onClick={cancelUpdate}>
+            Cancel
+          </button>
+        )}
       </center>
     </div>
   );

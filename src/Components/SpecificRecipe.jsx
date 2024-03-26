@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { deleteRecipe, getRecipeById } from "../services/recipeService";
+import FormData from "../Login/FormData";
 import "../Css/specificRecipe.css";
 const SpecificRecipe = () => {
   const [data, setData] = useState();
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const getData = async () => {
     try {
       const d = await getRecipeById(recipeId);
       setData(d);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
+  };
+  const cancelUpdate = () => {
+    setIsUpdateMode(false);
+    getData();
   };
   const onDeleteRecipe = async () => {
     try {
       await deleteRecipe(recipeId);
       navigate("/recipes");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
+  };
+  const onUpdateRecipe = () => {
+    setIsUpdateMode(true);
+    // navigate("/createRecipe");
   };
   useEffect(() => {
     getData();
   }, []);
 
   return (
-    data && (
+    data &&
+    (!isUpdateMode ? (
       <div className="specific-recipe-container">
         <div className="recipe-intro">
           <div className="recipe-image">
@@ -77,8 +84,17 @@ const SpecificRecipe = () => {
         <button className="delete-recipe-btn" onClick={onDeleteRecipe}>
           Delete
         </button>
+        <button className="update-recipe-btn" onClick={onUpdateRecipe}>
+          Update
+        </button>
       </div>
-    )
+    ) : (
+      <FormData
+        newDataToUpdate={data}
+        cancelUpdate={cancelUpdate}
+        isUpdateMode={isUpdateMode}
+      />
+    ))
   );
 };
 export default SpecificRecipe;

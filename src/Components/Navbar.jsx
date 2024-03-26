@@ -29,13 +29,6 @@ const Header = () => {
               Create Recipes{" "}
             </Link>
           </div>
-          {/* <div className="like">
-            <Link 
-            to = "/like"
-            style = {{textDecoration : "none", color:"black"}}>
-              Like (0 likes)
-            </Link>
-          </div> */}
         </div>
       </div>
     </div>

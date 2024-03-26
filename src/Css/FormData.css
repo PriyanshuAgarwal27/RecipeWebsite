@@ -14,7 +14,6 @@
 .form-container input {
   display: block;
   padding-left: 7px;
-  /* justify-self: auto; */
   margin: 1px;
   width: 100%;
   border-radius: 1px;
@@ -58,8 +57,26 @@
     background-color: gray;
   }
 }
+.form-container .cancel-button {
+  border-radius: 4px;
+  padding: 2px;
+  margin-top: 1rem;
+  width: 150px;
+  background-color: rgb(229, 60, 60);
+  color: white;
+  &:disabled {
+    background-color: gray;
+  }
+  margin-left: 1rem;
+}
+.tags-container {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
 .form-container .tag-cross {
-  /* display:block; */
   width: fit-content;
   align-self: flex-end;
   height: auto;

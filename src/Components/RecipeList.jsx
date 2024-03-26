@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import RecipesCard from "./RecipeCard";
 import { getRecipes } from "../services/recipeService";
 import { useDebounce } from "../hooks/useDebounce";

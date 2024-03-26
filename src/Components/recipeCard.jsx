@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { CARD_IMAGE } from "../Utils/constants";
 import "../Css/RecipeList.css";
 const RecipesCard = ({
   recipeName,

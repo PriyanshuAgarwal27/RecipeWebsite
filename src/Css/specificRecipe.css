@@ -85,13 +85,27 @@ ul.ingredients-list .ingredient .ingredient-qty {
 .delete-recipe-btn {
   outline: none;
   background-color: #ff4d6d;
-  margin: 1rem 0px;
+  margin: 1rem 0rem;
+  margin-right: 0.5rem;
   color: white;
   padding: 0.25rem 1rem;
   cursor: pointer;
   border-radius: 4px;
 }
 .delete-recipe-btn:hover,
-:focus {
+.delete-recipe-btn:focus {
+  background-color: #a4133c;
+}
+.update-recipe-btn {
+  outline: none;
+  background-color: #ff4d6d;
+  margin: 1rem 0.5rem;
+  color: white;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.update-recipe-btn:hover,
+.update-recipe-btn:focus {
   background-color: #a4133c;
 }

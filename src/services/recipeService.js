@@ -13,7 +13,9 @@ export const getRecipes = (filters) => {
       data = data.filter((recipe) => {
         return (
           recipe.recipeName.toLowerCase().includes(search.toLowerCase()) ||
-          recipe.tags.includes(search) ||
+          recipe.tags
+            .map((tag) => tag.toLowerCase())
+            .includes(search.toLowerCase()) ||
           recipe.authorName.toLowerCase().includes(search.toLowerCase())
         );
       });
@@ -52,7 +54,8 @@ export const updateRecipe = (recipeId, recipeData) => {
     if (indexToUpdate === -1) {
       reject("Recipe not found with given id");
     } else {
-      mockData.splice(indexToUpdate, 1, recipeData);
+      mockData.splice(indexToUpdate, 1, { ...recipeData, id: recipeId });
+      loadRecipesToLocalstorage(mockData);
       resolve(true);
     }
   });
