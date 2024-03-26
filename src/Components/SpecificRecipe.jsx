@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getRecipeById } from "../services/recipeService";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { deleteRecipe, getRecipeById } from "../services/recipeService";
 import "../Css/specificRecipe.css";
 const SpecificRecipe = () => {
   const [data, setData] = useState();
   const { recipeId } = useParams();
-
+  const navigate = useNavigate();
   const getData = async () => {
-    const d = await getRecipeById(recipeId);
-    setData(d);
+    try {
+      const d = await getRecipeById(recipeId);
+      setData(d);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
+  const onDeleteRecipe = async () => {
+    try {
+      await deleteRecipe(recipeId);
+      navigate("/recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -63,6 +74,9 @@ const SpecificRecipe = () => {
           <h2 className="recipe-steps-tag">Recipe Steps </h2>
           <div> {data.recipeSteps}</div>
         </div>
+        <button className="delete-recipe-btn" onClick={onDeleteRecipe}>
+          Delete
+        </button>
       </div>
     )
   );

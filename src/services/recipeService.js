@@ -1,5 +1,9 @@
 import { nanoid } from "nanoid";
 import mockData from "../Utils/MockData";
+import {
+  addReceipeToLocalStorage,
+  loadRecipesToLocalstorage,
+} from "./localStorageService";
 
 export const getRecipes = (filters) => {
   const { search } = filters;
@@ -34,26 +38,37 @@ export const createRecipe = (recipeData) => {
   return new Promise((resolve, reject) => {
     const newRecipe = { ...recipeData, id: nanoid(5) };
     mockData.push(newRecipe);
+    addReceipeToLocalStorage(newRecipe);
     resolve(newRecipe);
   });
 };
 
 export const updateRecipe = (recipeId, recipeData) => {
   return new Promise((resolve, reject) => {
-    let updatedRecipe = null;
-    mockData = mockData.map((recipe) => {
-      if (recipe.id === recipeId) {
-        updatedRecipe = {
-          ...recipeData,
-          id: recipe.id,
-        };
-        return updatedRecipe;
-      }
-      return recipe;
+    const indexToUpdate = mockData.findIndex((recipe) => {
+      return recipe.id === recipeId;
     });
 
-    if (updatedRecipe === null) {
+    if (indexToUpdate === -1) {
       reject("Recipe not found with given id");
-    } else resolve(updatedRecipe);
+    } else {
+      mockData.splice(indexToUpdate, 1, recipeData);
+      resolve(true);
+    }
+  });
+};
+
+export const deleteRecipe = (recipeId) => {
+  new Promise((resolve, reject) => {
+    const index = mockData.findIndex((recipe) => {
+      return recipe.id === recipeId;
+    });
+    if (index === -1) {
+      reject("Recipe Not found");
+    } else {
+      mockData.splice(index, 1);
+      loadRecipesToLocalstorage(mockData);
+      resolve(true);
+    }
   });
 };
