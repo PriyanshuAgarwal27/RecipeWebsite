@@ -44,9 +44,14 @@ const RecipeList = () => {
               setInputSearch(e.target.value);
             }}
           />
-          <button className="cancel-search-input" onClick={onCancelSearchEvent}>
-            ❌
-          </button>
+          {inputSearch && (
+            <button
+              className="cancel-search-input"
+              onClick={onCancelSearchEvent}
+            >
+              ❌
+            </button>
+          )}
         </div>
         <div className="card-container">
           {filteredData.map((recipe) => (
