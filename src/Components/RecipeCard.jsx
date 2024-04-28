@@ -6,7 +6,7 @@ const RecipesCard = ({
   authorName,
   tags,
   description,
-  id,
+  _id,
   imageUrl,
 }) => {
   const truncatedDescription = useMemo(() => {
@@ -15,11 +15,12 @@ const RecipesCard = ({
     }
     return description;
   }, [description]);
+  console.log(_id);
   return (
     <Link
-      key={id}
+      key={_id}
       className="receipe-card"
-      to={"/recipes/" + id}
+      to={"/recipes/" + _id}
       style={{ textDecoration: "none", color: "black" }}
     >
       <div>

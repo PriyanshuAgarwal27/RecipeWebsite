@@ -10,8 +10,9 @@ const SpecificRecipe = () => {
   const navigate = useNavigate();
   const getData = async () => {
     try {
-      const d = await getRecipeById(recipeId);
-      setData(d);
+      const recipe = await getRecipeById(recipeId);
+      console.log(recipe);
+      setData(recipe);
     } catch (error) {}
   };
   const cancelUpdate = () => {

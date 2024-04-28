@@ -1,0 +1,43 @@
+.login-form {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form .email-input {
+  border: 1px solid black;
+  margin-top: 1px;
+  padding: 0.5px 2px;
+  margin-bottom: 1rem;
+}
+.login-form .pass-input {
+  border: 1px solid black;
+  margin: 1px;
+  padding: 0.5px 2px;
+  margin-bottom: 1rem;
+}
+.login-form .name-input {
+  border: 1px solid black;
+  margin: 1px;
+  padding: 0.5px 2px;
+  margin-bottom: 1rem;
+}
+.block {
+  display: inline-block;
+
+  border: 1px solid black;
+  margin-top: 7rem;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.h1 {
+  margin: 8rem;
+}
+.submit-login-form {
+  margin-top: 2rem;
+  align-self: flex-end;
+  padding: 7px;
+  background-color: red;
+  color: azure;
+}

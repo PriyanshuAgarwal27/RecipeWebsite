@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import RecipesCard from "./RecipeCard";
+import axios from "axios";
 import { getRecipes } from "../services/recipeService";
 import { useDebounce } from "../hooks/useDebounce";
 import "../Css/body.css";
@@ -55,7 +56,7 @@ const RecipeList = () => {
         </div>
         <div className="card-container">
           {filteredData.map((recipe) => (
-            <RecipesCard {...recipe} id={recipe.id} />
+            <RecipesCard key={recipe._id} {...recipe} id={recipe._id} />
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../Css/FormData.css";
 import { useNavigate } from "react-router-dom";
 import { TERMS_AND_CONDITIONS } from "../Utils/constants";
@@ -10,6 +10,7 @@ import {
 
 const FormData = ({ newDataToUpdate, cancelUpdate, isUpdateMode }) => {
   const [isChecked, setIsChecked] = useState(false);
+  console.log(newDataToUpdate);
   const [inputValue, setInputValue] = useState({
     authorName: newDataToUpdate?.authorName,
     recipeName: newDataToUpdate?.recipeName,
@@ -41,6 +42,12 @@ const FormData = ({ newDataToUpdate, cancelUpdate, isUpdateMode }) => {
       setInputValue((prevData) => ({
         ...prevData,
         [name]: value,
+      }));
+    }
+    if (name === "imageUrl") {
+      setInputValue((prevData) => ({
+        ...prevData,
+        [name]: value.files,
       }));
     }
   };
@@ -85,6 +92,7 @@ const FormData = ({ newDataToUpdate, cancelUpdate, isUpdateMode }) => {
     const description = inputValue.description;
     const recipeSteps = inputValue.recipeSteps;
     const tags = displayTag;
+    console.log(inputValue);
     const imageUrl = inputValue.imageUrl;
     const recipeData = {
       authorName,
@@ -198,7 +206,8 @@ const FormData = ({ newDataToUpdate, cancelUpdate, isUpdateMode }) => {
         <label className="form-label" htmlFor="imageUrl">
           Image URL
           <input
-            type="text"
+            type="file"
+            accept=".jpg"
             className="form-input"
             name="imageUrl"
             placeholder="eg https://url"

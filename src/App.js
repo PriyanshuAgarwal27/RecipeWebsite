@@ -1,21 +1,23 @@
 // import "./App.css";
 import FormData from "./Login/FormData";
+import mockData from "./Utils/MockData";
+import SignUp from "./Login/SignUp";
+import Login from "./Login/Login";
 import Error from "./Components/RouterError";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
 import RecipeList from "./Components/RecipeList";
 import SpecificRecipe from "./Components/SpecificRecipe";
 import Layout from "./Components/Layout";
 import { useLayoutEffect } from "react";
 import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import {
   loadRecipesFromLocalstorage,
   loadRecipesToLocalstorage,
   RECEIPE_KEY,
 } from "./services/localStorageService";
-import mockData from "./Utils/MockData";
 
 function App() {
   useLayoutEffect(() => {
@@ -55,6 +57,14 @@ function App() {
           element: <FormData />,
         },
       ],
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/Signup",
+      element: <SignUp />,
     },
   ]);
   return (

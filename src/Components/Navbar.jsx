@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LOGO } from "../Utils/constants.jsx";
 import "../Css/header.css";
 
-const Header = () => {
+const Navbar = () => {
   //subscribing our store using a selecteor
   // const cart = useSelector(appStore);
   return (
@@ -21,7 +21,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="login-navbar">
+          <div className="create-recipe-navbar">
             <Link
               to="/createRecipe"
               style={{ textDecoration: "none", color: "black" }}
@@ -29,9 +29,17 @@ const Header = () => {
               Create Recipes{" "}
             </Link>
           </div>
+          <div className="login-navbar">
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Logout
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-export default Header;
+export default Navbar;

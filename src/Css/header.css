@@ -1,27 +1,26 @@
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border:1px solid black;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
 }
-.header .left-side{
-    justify-content: flex-start;
+.header .left-side {
+  justify-content: flex-start;
 }
 .header .home-navbar,
 .header .about-navbar,
-.header .login-navbar,
-.header .like{
-    
-    padding-top: 20px;
-    padding-right: 50px;
+.header .create-recipe-navbar,
+.header .login-navbar {
+  padding-top: 20px;
+  padding-right: 50px;
 }
 
-.header .logo{
-    width:100px;
-    display: flex;
-    height: 60px;
+.header .logo {
+  width: 100px;
+  display: flex;
+  height: 60px;
 }
-.header .right-side{
-    display: flex;
-    justify-content: flex-end;
+.header .right-side {
+  display: flex;
+  justify-content: flex-end;
 }
