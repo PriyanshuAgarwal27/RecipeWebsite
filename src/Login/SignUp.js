@@ -7,7 +7,7 @@ import { IconButton } from "@mui/joy";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [passVisible, setPassVisisble] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -19,6 +19,9 @@ const SignUp = () => {
     if (name === "email" || name === "password" || name === "name") {
       setInput((prev) => ({ ...prev, [name]: value }));
     }
+  };
+  const onToggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
     await userSignUp(input);
@@ -58,7 +61,7 @@ const SignUp = () => {
           PASSWORD
           <div className="pass-input">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               value={input.password}
@@ -66,7 +69,9 @@ const SignUp = () => {
               onChange={OnHandleInputChange}
               required
             />
-            <button>{FaEye}</button>
+            <button onClick={onToggleShowPassword}>
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </button>
           </div>
         </div>
         <div>

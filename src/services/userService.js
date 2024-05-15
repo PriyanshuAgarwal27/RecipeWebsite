@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const userSignUp = (userInput) => {
-  return axios.post("/users/signup", userInput, {
+export const userSignUp = (userSignUpInput) => {
+  return axios.post("/users/signup", userSignUpInput, {
     headers: { "Content-Type": "application/json" },
   });
 };

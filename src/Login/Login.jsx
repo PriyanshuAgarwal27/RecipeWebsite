@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "../Css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../services/userService";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -15,6 +16,9 @@ const Login = () => {
     if (name === "email" || name === "password") {
       setInput((prev) => ({ ...prev, [name]: value }));
     }
+  };
+  const onToggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
     await userLogin(input);
@@ -41,7 +45,7 @@ const Login = () => {
           PASSWORD
           <div className="pass-input">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               id="password"
               value={input.password}
@@ -50,6 +54,9 @@ const Login = () => {
               required
               autoComplete="off"
             />
+            <button onClick={onToggleShowPassword}>
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </button>
           </div>
         </div>
         <div>
