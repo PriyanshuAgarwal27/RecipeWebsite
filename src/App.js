@@ -37,7 +37,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Navigate to="/recipes" />,
+          element: <Navigate to="/login" />,
         },
         {
           path: "/recipes",
