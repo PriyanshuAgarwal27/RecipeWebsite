@@ -22,7 +22,7 @@ const Login = () => {
   };
   const onsubmit = async () => {
     await userLogin(input);
-    navigate("/");
+    navigate("/recipes");
   };
 
   return (
