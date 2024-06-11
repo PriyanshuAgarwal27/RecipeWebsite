@@ -4,8 +4,6 @@ import { LOGO } from "../Utils/constants.jsx";
 import "../Css/header.css";
 
 const Navbar = () => {
-  //subscribing our store using a selecteor
-  // const cart = useSelector(appStore);
   return (
     <div>
       <div className="header">
@@ -16,7 +14,10 @@ const Navbar = () => {
         </div>
         <div className="right-side">
           <div className="home-navbar">
-            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Link
+              to="/recipes"
+              style={{ textDecoration: "none", color: "black" }}
+            >
               Home
             </Link>
           </div>

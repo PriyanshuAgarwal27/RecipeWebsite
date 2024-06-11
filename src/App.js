@@ -1,18 +1,7 @@
-// import "./App.css";
-import FormData from "./Login/FormData";
 import mockData from "./Utils/MockData";
-import SignUp from "./Login/SignUp";
-import Login from "./Login/Login";
-import Error from "./Components/RouterError";
-import RecipeList from "./Components/RecipeList";
-import SpecificRecipe from "./Components/SpecificRecipe";
-import Layout from "./Components/Layout";
+import appRouter from "./appRouter";
 import { useLayoutEffect } from "react";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import {
   loadRecipesFromLocalstorage,
   loadRecipesToLocalstorage,
@@ -29,44 +18,44 @@ function App() {
     }
   }, []);
 
-  const appRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      errorElement: <Error />,
-      children: [
-        {
-          index: true,
-          element: <Navigate to="/login" />,
-        },
-        {
-          path: "/recipes",
-          children: [
-            {
-              index: true,
-              element: <RecipeList />,
-            },
-            {
-              path: ":recipeId",
-              element: <SpecificRecipe />,
-            },
-          ],
-        },
-        {
-          path: "/createRecipe",
-          element: <FormData />,
-        },
-      ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/Signup",
-      element: <SignUp />,
-    },
-  ]);
+  // const appRouter = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Layout />,
+  //     errorElement: <Error />,
+  //     children: [
+  //       {
+  //         index: true,
+  //         element: <Navigate to="/login" />,
+  //       },
+  //       {
+  //         path: "/recipes",
+  //         children: [
+  //           {
+  //             index: true,
+  //             element: <RecipeList />,
+  //           },
+  //           {
+  //             path: ":recipeId",
+  //             element: <SpecificRecipe />,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         path: "/createRecipe",
+  //         element: <FormData />,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     path: "/login",
+  //     element: <Login />,
+  //   },
+  //   {
+  //     path: "/Signup",
+  //     element: <SignUp />,
+  //   },
+  // ]);
   return (
     <div>
       <RouterProvider router={appRouter} />
