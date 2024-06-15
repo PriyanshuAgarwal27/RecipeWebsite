@@ -1,13 +1,14 @@
 // import { nanoid } from "nanoid";
-import axios from "axios";
+import axios from "../api_instance.js";
 import mockData from "../Utils/MockData";
 import {
   addReceipeToLocalStorage,
   loadRecipesToLocalstorage,
 } from "./localStorageService";
+import instance from "../api_instance";
 
 export const getRecipes = (filters) => {
-  // const { search } = filters;
+  const { search } = filters;
   // return new Promise((resolve, reject) => {
   //   let data = [...mockData];
   //   if (search) {
@@ -23,7 +24,7 @@ export const getRecipes = (filters) => {
   //   }
   //   resolve(data);
   // });
-  return axios.get("/recipes").then((res) => res.data);
+  return axios.get("/recipes", { params: filters }).then((res) => res.data);
 };
 
 export const getRecipeById = (recipeId) => {

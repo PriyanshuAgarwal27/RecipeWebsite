@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import RecipesCard from "./RecipeCard";
-import axios from "axios";
 import { getRecipes } from "../services/recipeService";
 import { useDebounce } from "../hooks/useDebounce";
 import "../Css/body.css";
