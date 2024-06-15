@@ -8,6 +8,7 @@ import { IconButton } from "@mui/joy";
 const SignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [showErrorMessage, setshowErrorMessage] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -24,8 +25,12 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
-    await userSignUp(input);
-    navigate("/Login");
+    try {
+      await userSignUp(input);
+      navigate("/Login");
+    } catch (error) {
+      setshowErrorMessage(error.response.data.message);
+    }
   };
 
   return (
@@ -79,6 +84,7 @@ const SignUp = () => {
             Submit
           </button>
         </div>
+        <div>{showErrorMessage && <h1>{showErrorMessage}</h1>}</div>
       </div>
     </center>
   );

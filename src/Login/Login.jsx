@@ -5,6 +5,7 @@ import { userLogin } from "../services/userService";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMEssage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     email: "",
@@ -21,8 +22,12 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
-    await userLogin(input);
-    navigate("/recipes");
+    try {
+      await userLogin(input);
+      navigate("/recipes");
+    } catch (error) {
+      setErrorMEssage(error.response.data.error);
+    }
   };
 
   return (
@@ -64,6 +69,7 @@ const Login = () => {
             Submit
           </button>
         </div>
+        <div>{errorMessage && <h1>{errorMessage}</h1>}</div>
       </div>
       <Link to="/Signup">
         {" "}
