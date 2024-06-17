@@ -18,44 +18,6 @@ function App() {
     }
   }, []);
 
-  // const appRouter = createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     element: <Layout />,
-  //     errorElement: <Error />,
-  //     children: [
-  //       {
-  //         index: true,
-  //         element: <Navigate to="/login" />,
-  //       },
-  //       {
-  //         path: "/recipes",
-  //         children: [
-  //           {
-  //             index: true,
-  //             element: <RecipeList />,
-  //           },
-  //           {
-  //             path: ":recipeId",
-  //             element: <SpecificRecipe />,
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         path: "/createRecipe",
-  //         element: <FormData />,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     path: "/login",
-  //     element: <Login />,
-  //   },
-  //   {
-  //     path: "/Signup",
-  //     element: <SignUp />,
-  //   },
-  // ]);
   return (
     <div>
       <RouterProvider router={appRouter} />

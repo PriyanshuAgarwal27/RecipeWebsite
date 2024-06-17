@@ -65,7 +65,7 @@ export const updateRecipe = async (recipeId, recipeData) => {
   //     loadRecipesToLocalstorage(mockData);
   //     resolve(true);
   //   }
-  return await axios.put(`/recipes/${recipeId}`, recipeData, {
+  return await axios.put(`/recipes/${recipeId}/update`, recipeData, {
     headers: { "Content-Type": "application/json" },
   });
 };
