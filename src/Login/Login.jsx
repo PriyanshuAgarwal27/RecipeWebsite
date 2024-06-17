@@ -3,10 +3,12 @@ import "../Css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../services/userService";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ValidationSignUp } from "../Utils/ValidationSignUp";
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMEssage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState("");
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -22,11 +24,16 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
-    try {
-      await userLogin(input);
-      navigate("/recipes");
-    } catch (error) {
-      setErrorMEssage(error.response.data.error);
+    const error = ValidationSignUp(input);
+    if (Object.keys(error).length > 0) {
+      setFormErrors(error);
+    } else {
+      try {
+        await userLogin(input);
+        navigate("/recipes");
+      } catch (error) {
+        setErrorMEssage(error.response.data.error);
+      }
     }
   };
 
@@ -38,7 +45,7 @@ const Login = () => {
           EMAIL
           <div className="email-input">
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               value={input.email}
@@ -47,6 +54,7 @@ const Login = () => {
               required
             />
           </div>
+          <div style={{ color: "red" }}>{formErrors.email}</div>
           PASSWORD
           <div className="pass-input">
             <input
@@ -63,6 +71,7 @@ const Login = () => {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
+          <div style={{ color: "red" }}>{formErrors.password}</div>
         </div>
         <div>
           <button className="submit-login-form" onClick={onsubmit}>

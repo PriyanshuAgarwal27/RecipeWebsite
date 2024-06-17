@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignUp } from "../services/userService";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../Css/Login.css";
-import { IconButton } from "@mui/joy";
-
+import { ValidationSignUp } from "./../Utils/ValidationSignUp";
 const SignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showErrorMessage, setshowErrorMessage] = useState("");
+  const [formError, setFormError] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -25,11 +25,16 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
-    try {
-      await userSignUp(input);
-      navigate("/Login");
-    } catch (error) {
-      setshowErrorMessage(error.response.data.message);
+    const error = ValidationSignUp(input);
+    if (Object.keys(error).length > 0) {
+      setFormError(ValidationSignUp(input));
+    } else {
+      try {
+        await userSignUp(input);
+        navigate("/Login");
+      } catch (error) {
+        setshowErrorMessage(error.response.data.message);
+      }
     }
   };
 
@@ -50,11 +55,12 @@ const SignUp = () => {
               onChange={OnHandleInputChange}
               required
             />
+            <div style={{ color: "red" }}>{formError.name}</div>
           </div>
           EMAIL
           <div className="email-input">
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               value={input.email}
@@ -63,6 +69,7 @@ const SignUp = () => {
               required
             />
           </div>
+          <div style={{ color: "red" }}>{formError.email}</div>
           PASSWORD
           <div className="pass-input">
             <input
@@ -78,6 +85,7 @@ const SignUp = () => {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
+          <div style={{ color: "red" }}>{formError.password}</div>
         </div>
         <div>
           <button className="submit-login-form" onClick={onsubmit}>
