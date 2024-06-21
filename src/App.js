@@ -1,6 +1,6 @@
 import mockData from "./Utils/MockData";
 import appRouter from "./appRouter";
-import { useLayoutEffect } from "react";
+import { Suspense, useLayoutEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import {
   loadRecipesFromLocalstorage,
@@ -19,9 +19,9 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={appRouter} />
-    </div>
+    </Suspense>
   );
 }
 

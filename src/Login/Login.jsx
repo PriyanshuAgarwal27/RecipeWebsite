@@ -80,7 +80,7 @@ const Login = () => {
         </div>
         <div>{errorMessage && <h1>{errorMessage}</h1>}</div>
       </div>
-      <Link to="/Signup">
+      <Link to="/signup">
         {" "}
         <div>Don't have an account? SignUp</div>
       </Link>

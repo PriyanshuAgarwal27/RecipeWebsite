@@ -1,12 +1,14 @@
+import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import SignUp from "./Login/SignUp";
-import Login from "./Login/Login";
-import Error from "./Components/RouterError";
-import RecipeList from "./Components/RecipeList";
-import SpecificRecipe from "./Components/SpecificRecipe";
-import Layout from "./Components/Layout";
-import FormData from "./Login/FormData";
 
+import Error from "./Components/RouterError";
+
+const SignUp = lazy(() => import("./Login/SignUp"));
+const Login = lazy(() => import("./Login/Login"));
+const RecipeList = lazy(() => import("./Components/RecipeList"));
+const SpecificRecipe = lazy(() => import("./Components/SpecificRecipe"));
+const Layout = lazy(() => import("./Components/Layout"));
+const FormData = lazy(() => import("./Login/FormData"));
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +43,7 @@ const appRouter = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/Signup",
+    path: "/signup",
     element: <SignUp />,
   },
 ]);
