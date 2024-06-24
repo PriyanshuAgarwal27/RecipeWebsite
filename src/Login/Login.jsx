@@ -3,7 +3,7 @@ import "../Css/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../services/userService";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { ValidationSignUp } from "../Utils/ValidationSignUp";
+import { ValidationLogin } from "../Utils/ValidationLogin";
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMEssage] = useState("");
@@ -24,7 +24,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   const onsubmit = async () => {
-    const error = ValidationSignUp(input);
+    const error = ValidationLogin(input);
     if (Object.keys(error).length > 0) {
       setFormErrors(error);
     } else {
